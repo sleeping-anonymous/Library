@@ -43,3 +43,16 @@ function render() {
         bookCard.appendChild(bookRead);
     }
 }
+
+let btnAdd = document.querySelector(".add-book");
+const modal = document.querySelector("#dialog");
+const confirmBtn = document.querySelector("#confirm-btn");
+
+btnAdd.addEventListener("click", () => {
+    dialog.showModal();
+})
+
+confirmBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    dialog.close();
+})

@@ -1,4 +1,73 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    background-color: #313131;
+}
+
+h1 {
+    text-align: center;
+    padding: 10px;
+}
+
+h1,
+h2 {
+    color: white;
+}
+
+.sidebar {
+    width: 30%;
+}
+
+button {
+    margin: 10px;
+    padding: 6px;
+    font-size: 18px;
+    border-radius: 6px;
+    background-color: antiquewhite;
+}
+
+dialog {
+    position: fixed;
+    top: 25%;
+    left: 40%;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 8px;
+
+    width: 400px;
+}
+
+dialog input[type="text"],
+dialog input[type="number"] {
+    width: 90%;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+
+.books-view {
+    display: flex;
+    width: 70%;
+
+    background-color: aqua;
+}
+
+.card {
+    padding: 8px;
+    margin: 8px;
+    border: 2px solid black;
 }
