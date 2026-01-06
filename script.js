@@ -21,34 +21,39 @@ function render() {
         let bookCard = document.createElement("div");
         bookCard.classList.add("card");
 
+        bookCard.dataset.id = book.id;   // data -id , visible only to js ,used for these purposes only
 
-        let bookTitle = document.createElement('h3');
-        bookTitle.textContent = book.title;
-        bookTitle.classList.add("title");
-        bookCard.appendChild(bookTitle);
 
-        let bookAuthor = document.createElement('p');
-        bookAuthor.textContent = book.author;
-        bookAuthor.classList.add("author");
-        bookCard.appendChild(bookAuthor);
+        // let bookTitle = document.createElement('h3');
+        // bookTitle.textContent = book.title;
+        // bookTitle.classList.add("title");
+        // bookCard.appendChild(bookTitle);
 
-        let bookPages = document.createElement('p');
-        bookPages.textContent = book.pages;
-        bookPages.classList.add("pages");
-        bookCard.appendChild(bookPages);
+        // let bookAuthor = document.createElement('p');
+        // bookAuthor.textContent = book.author;
+        // bookAuthor.classList.add("author");
+        // bookCard.appendChild(bookAuthor);
 
-        let bookRead = document.createElement('h3');
-        bookRead.textContent = book.read;
-        bookRead.classList.add("read-status");
-        bookCard.appendChild(bookRead);
+        // let bookPages = document.createElement('p');
+        // bookPages.textContent = book.pages;
+        // bookPages.classList.add("pages");
+        // bookCard.appendChild(bookPages);
 
-        /*  bookCard.innerHTML = `
-            <h3 class="title">${book.title}</h3>
-            <p class="author">${book.author}</p>
-            <p class="pages">${book.pages} pages</p>
-            <p class="read-status">${book.read ? "Read" : "Not Read"}</p>
-        `; 
-        one way to do same */
+        // let bookRead = document.createElement('h3');
+        // bookRead.textContent = book.read;
+        // bookRead.classList.add("read-status");
+        // bookCard.appendChild(bookRead);
+
+        // same as above just easy and clean
+
+        bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <p>${book.author}</p>
+            <p>${book.pages} pages</p>
+            <p>${book.read ? "Read" : "Not Read"}</p>
+            <button class="remove-btn">Remove</button>
+        `;
+
 
         lib.appendChild(bookCard);
     }
@@ -79,3 +84,21 @@ form.addEventListener("submit", (e) => {
     dialog.close();
 
 })
+
+document.querySelector(".books-view")
+    .addEventListener("click", (e) => {
+        if (!e.target.classList.contains("remove-btn")) return;
+
+        const card = e.target.closest(".card");   // closest walks upward in heirarichal to find .card 
+        //cheks e,target , then its parent , its parent until it finds .card till root or returns null
+        const id = card.dataset.id;  // string
+
+        const index = myLibrary.findIndex(book => book.id === id);
+        // previously used : myLibrary = myLibrary.filter(book => book.id !== id);
+        // doesnt work since myLibrary is const and filter returns a new array .
+        if (index !== -1)
+            myLibrary.splice(index, 1);
+
+        render();
+
+    })
