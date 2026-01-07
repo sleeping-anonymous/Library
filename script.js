@@ -24,29 +24,12 @@ function render() {
         bookCard.dataset.id = book.id;   // data -id , visible only to js ,used for these purposes only
 
 
-        // let bookTitle = document.createElement('h3');
-        // bookTitle.textContent = book.title;
-        // bookTitle.classList.add("title");
-        // bookCard.appendChild(bookTitle);
-
-        // let bookAuthor = document.createElement('p');
-        // bookAuthor.textContent = book.author;
-        // bookAuthor.classList.add("author");
-        // bookCard.appendChild(bookAuthor);
-
-        // let bookPages = document.createElement('p');
-        // bookPages.textContent = book.pages;
-        // bookPages.classList.add("pages");
-        // bookCard.appendChild(bookPages);
-
         // let bookRead = document.createElement('h3');
         // bookRead.textContent = book.read;
         // bookRead.classList.add("read-status");
         // bookCard.appendChild(bookRead);
 
-
-
-        // same as above just easy and clean
+        // can do this also
 
         bookCard.innerHTML = `
             <h3>${book.title}</h3>
@@ -65,6 +48,7 @@ function render() {
 let btnAdd = document.querySelector(".add-book");
 const dialog = document.querySelector("#dialog");
 const form = document.querySelector("form");
+
 
 btnAdd.addEventListener("click", () => {
     dialog.showModal();
@@ -115,3 +99,9 @@ document.querySelector(".books-view")             // event delegation since Dyna
 Books.prototype.toggleReadStatus = function () {
     this.read = !this.read;   // read is true or false
 }
+
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
+addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary("Clean Code", "Robert C. Martin", 464, true);
+
+render();

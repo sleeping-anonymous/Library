@@ -10,18 +10,26 @@ body {
 }
 
 h1 {
-    text-align: center;
-    padding: 10px;
+    color: aquamarine
 }
 
-h1,
 h2 {
     color: white;
 }
 
-.sidebar {
-    width: 30%;
+h1,
+h2 {
+    text-align: center;
+    padding: 10px;
 }
+
+.add-book {
+    display: block;
+    /* so takes full line */
+    margin: 10px auto;
+
+}
+
 
 button {
     margin: 10px;
@@ -33,12 +41,30 @@ button {
 
 dialog {
     position: fixed;
-    top: 25%;
-    left: 40%;
+    inset: 0;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    /* imp otherwise unable to set to center of page*/
+    height: 100vh;
+
+    background: transparent;
+    /*otherwise complete white background*/
+
+    /* display: flex;
+    here dialog box was always open if used this*/
+
+}
+
+dialog[open] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 dialog form {
@@ -49,6 +75,8 @@ dialog form {
     border-radius: 8px;
 
     width: 400px;
+    background-color: #2b2b2b;
+    color: white;
 }
 
 dialog input[type="text"],
@@ -60,14 +88,18 @@ dialog input[type="number"] {
 
 
 .books-view {
-    display: flex;
-    width: 70%;
-
-    background-color: aqua;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 20px;
 }
 
 .card {
-    padding: 8px;
-    margin: 8px;
-    border: 2px solid black;
+    background-color: #2b2b2b;
+    color: #f5f5f5;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
