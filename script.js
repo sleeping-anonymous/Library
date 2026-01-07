@@ -44,6 +44,8 @@ function render() {
         // bookRead.classList.add("read-status");
         // bookCard.appendChild(bookRead);
 
+
+
         // same as above just easy and clean
 
         bookCard.innerHTML = `
@@ -51,6 +53,7 @@ function render() {
             <p>${book.author}</p>
             <p>${book.pages} pages</p>
             <p>${book.read ? "Read" : "Not Read"}</p>
+            <button class = "toggle-btn">Toggle Read Status</button>
             <button class="remove-btn">Remove</button>
         `;
 
@@ -85,20 +88,30 @@ form.addEventListener("submit", (e) => {
 
 })
 
-document.querySelector(".books-view")
+document.querySelector(".books-view")             // event delegation since Dynamic elements need a static parent to listen for them.
     .addEventListener("click", (e) => {
-        if (!e.target.classList.contains("remove-btn")) return;
+        if (!e.target.classList.contains("remove-btn") && !e.target.classList.contains("toggle-btn")) return;
+
 
         const card = e.target.closest(".card");   // closest walks upward in heirarichal to find .card 
         //cheks e,target , then its parent , its parent until it finds .card till root or returns null
         const id = card.dataset.id;  // string
+        const book = myLibrary.find(book => book.id === id);
 
-        const index = myLibrary.findIndex(book => book.id === id);
-        // previously used : myLibrary = myLibrary.filter(book => book.id !== id);
-        // doesnt work since myLibrary is const and filter returns a new array .
-        if (index !== -1)
-            myLibrary.splice(index, 1);
-
+        if (e.target.classList.contains("remove-btn")) {
+            const index = myLibrary.findIndex(book => book.id === id);
+            // previously used : myLibrary = myLibrary.filter(book => book.id !== id);
+            // doesnt work since myLibrary is const and filter returns a new array .
+            if (index !== -1)
+                myLibrary.splice(index, 1);
+        }
+        if (e.target.classList.contains("toggle-btn")) {
+            book.toggleReadStatus();
+        }
         render();
 
     })
+
+Books.prototype.toggleReadStatus = function () {
+    this.read = !this.read;   // read is true or false
+}
